@@ -230,8 +230,6 @@ namespace Calculator
                 stOut = num.ToString("N", nfi);
                 if (lblResult.Text.IndexOf(",") == lblResult.Text.Length - 1) stOut += ",";
                 lblResult.Text = stOut;
-
-
             }
             if (lblResult.Text.Length > lblResultMaxDigit)
                 lblResult.Text = lblResult.Text.Substring(0, lblResultMaxDigit);
