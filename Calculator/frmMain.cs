@@ -129,6 +129,10 @@ namespace Calculator
                             lblResult.Text = "-" + lblResult.Text;
                         else
                             lblResult.Text = lblResult.Text.Substring(1);
+                    if(lastButtonClicked.Type == SymbolType.Operator)
+                    {
+                        operand1 = -operand1;
+                    }
                     break;
                 case SymbolType.Backspace:
                     if (lastButtonClicked.Type != SymbolType.Operator)
@@ -207,14 +211,23 @@ namespace Calculator
                 operand2 = decimal.Parse(lblResult.Text);
                 switch (clickedButtonStruct.Content)
                 {
+                    case '%':
+                        result = operand1 + operand2 / 100;
+                        break;
                     case '\u215F':
                         result = 1 / operand2;
+                        break;
+                    case '\u00B2':
+                        result = operand2 * operand2;
+                        break;
+                    case '\u221A':
+                        result = (decimal)Math.Sqrt((double)operand2);
                         break;
                     default:
                         break;
                 }
+                
                 lblResult.Text = result.ToString();
-                return;
             }
         }
 
