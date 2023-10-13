@@ -100,6 +100,13 @@ namespace Calculator
             Button clickedButton = (Button)sender;
             btnStruct clickedButtonStruct = (btnStruct)clickedButton.Tag;
 
+            if(lastButtonClicked.Content != clickedButtonStruct.Content)
+            {
+                lblCronology.Text += clickedButton.Text;
+                if (lastButtonClicked.Content == '=')
+                    lblCronology.Text = operand1.ToString();
+            }
+
             switch (clickedButtonStruct.Type)
             {
                 case SymbolType.Number:
@@ -166,6 +173,7 @@ namespace Calculator
             result = 0;
             lastOperator = ' ';
             lblResult.Text = "0";
+            lblCronology.Text = "";
         }
 
         private void ManageOperator(btnStruct clickedButtonStruct)

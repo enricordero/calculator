@@ -30,15 +30,15 @@
         {
             this.lblResult = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.lblCronology = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblResult
             // 
-            this.lblResult.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblResult.Font = new System.Drawing.Font("Segoe UI Semibold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(0, 30);
+            this.lblResult.Location = new System.Drawing.Point(0, 43);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(320, 80);
+            this.lblResult.Size = new System.Drawing.Size(320, 62);
             this.lblResult.TabIndex = 0;
             this.lblResult.Text = "0";
             this.lblResult.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -51,11 +51,20 @@
             this.panelTop.Size = new System.Drawing.Size(320, 30);
             this.panelTop.TabIndex = 1;
             // 
+            // lblCronology
+            // 
+            this.lblCronology.Location = new System.Drawing.Point(3, 20);
+            this.lblCronology.Name = "lblCronology";
+            this.lblCronology.Size = new System.Drawing.Size(317, 23);
+            this.lblCronology.TabIndex = 2;
+            this.lblCronology.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(320, 477);
+            this.Controls.Add(this.lblCronology);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -72,6 +81,7 @@
 
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Label lblCronology;
     }
 }
 
