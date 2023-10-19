@@ -32,7 +32,7 @@ namespace Calculator
             public char Content;
             public bool IsBold;
             public SymbolType Type;
-            public btnStruct(char c,SymbolType t = SymbolType.Undefined, bool b = false)
+            public btnStruct(char c, SymbolType t = SymbolType.Undefined, bool b = false)
             {
                 this.Content = c;
                 this.Type = t;
@@ -42,8 +42,8 @@ namespace Calculator
 
         private btnStruct[,] buttons =
         {
-            { new btnStruct('%'), new btnStruct('\u0152',SymbolType.ClearEntry), new btnStruct('C',SymbolType.ClearAll), new btnStruct('\u232B',SymbolType.Backspace) },
-            { new btnStruct('\u215F', SymbolType.SpecialOperator), new btnStruct('\u00B2'), new btnStruct('\u221A'), new btnStruct('\u00F7',SymbolType.Operator) },
+            { new btnStruct('%', SymbolType.SpecialOperator), new btnStruct('\u0152',SymbolType.ClearEntry), new btnStruct('C',SymbolType.ClearAll), new btnStruct('\u232B',SymbolType.Backspace) },
+            { new btnStruct('\u215F', SymbolType.SpecialOperator), new btnStruct('\u00B2', SymbolType.SpecialOperator), new btnStruct('\u221A', SymbolType.SpecialOperator), new btnStruct('\u00F7',SymbolType.Operator) },
             { new btnStruct('7',SymbolType.Number, true), new btnStruct('8',SymbolType.Number, true), new btnStruct('9',SymbolType.Number, true), new btnStruct('\u00D7',SymbolType.Operator) },
             { new btnStruct('4',SymbolType.Number, true), new btnStruct('5',SymbolType.Number, true), new btnStruct('6',SymbolType.Number, true), new btnStruct('-',SymbolType.Operator) },
             { new btnStruct('1',SymbolType.Number, true), new btnStruct('2',SymbolType.Number, true), new btnStruct('3',SymbolType.Number, true), new btnStruct('+',SymbolType.Operator) },
@@ -72,9 +72,9 @@ namespace Calculator
             int btnHeight = 60;
             int posX = 0;
             int posY = 116;
-            for(int i = 0; i < rows; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for(int j = 0; j < cols; j++)
+                for (int j = 0; j < cols; j++)
                 {
                     Button myButton = new Button();
                     FontStyle fs = buttons[i, j].IsBold ? FontStyle.Bold : FontStyle.Regular;
@@ -99,13 +99,6 @@ namespace Calculator
         {
             Button clickedButton = (Button)sender;
             btnStruct clickedButtonStruct = (btnStruct)clickedButton.Tag;
-
-            if(lastButtonClicked.Content != clickedButtonStruct.Content)
-            {
-                lblCronology.Text += clickedButton.Text;
-                if (lastButtonClicked.Content == '=')
-                    lblCronology.Text = operand1.ToString();
-            }
 
             switch (clickedButtonStruct.Type)
             {
@@ -136,7 +129,7 @@ namespace Calculator
                             lblResult.Text = "-" + lblResult.Text;
                         else
                             lblResult.Text = lblResult.Text.Substring(1);
-                    if(lastButtonClicked.Type == SymbolType.Operator)
+                    if (lastButtonClicked.Type == SymbolType.Operator)
                     {
                         operand1 = -operand1;
                     }
@@ -163,8 +156,26 @@ namespace Calculator
                 default:
                     break;
             }
+            string ultimoCliccato = "";
+            ultimoCliccato = lastButtonClicked.Content.ToString();
             if (clickedButtonStruct.Type != SymbolType.Backspace)
                 lastButtonClicked = clickedButtonStruct;
+            if (clickedButtonStruct.Type == SymbolType.Number)
+            {
+                lblCronology.Text += lastButtonClicked.Content;
+            }
+            if (clickedButtonStruct.Type == SymbolType.Operator)
+                lblCronology.Text += lastButtonClicked.Content;
+            if (clickedButtonStruct.Type == SymbolType.SpecialOperator)
+            {
+                lblCronology.Text = result.ToString();
+            }
+            if (clickedButtonStruct.Type == SymbolType.DecimalPoint)
+            {
+                lblCronology.Text += ',';
+            }
+            if (clickedButtonStruct.Content == '=')
+                lblCronology.Text = result.ToString();
         }
         private void ClearAll()
         {
@@ -220,7 +231,7 @@ namespace Calculator
                 switch (clickedButtonStruct.Content)
                 {
                     case '%':
-                        result = operand1 + operand2 / 100;
+                        result = operand1 * operand2 / 100;
                         break;
                     case '\u215F':
                         result = 1 / operand2;
@@ -234,7 +245,6 @@ namespace Calculator
                     default:
                         break;
                 }
-                
                 lblResult.Text = result.ToString();
             }
         }
